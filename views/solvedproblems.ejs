@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/code-512.png"
+        type="image/icon type">
+    <link type="text/css" rel="stylesheet" href="/public/styles/solve.css">
+    <link type="text/css" rel="stylesheet" href="/public/styles/solvedproblems.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css” />
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/addon/edit/closebrackets.js"></script>
+    <script src="/codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="/codemirror/addon/edit/matchtags.js"></script>
+    <script src="/codemirror/addon/edit/closetag.js"></script>
+    <script src="/codemirror/addon/edit/continuelist.js"></script>
+    <script src="/codemirror/addon/edit/trailingspace.js"></script>
+    <script src="/codemirror/mode/clike/clike.js"></script>
+    <script src="/codemirror/mode/python/python.js"></script>
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
+    <script src="/codemirror/mode/css/css.js"></script>
+    <script src="/codemirror/addon/hint/anyword-hint.js"></script>
+    <script src="/codemirror/addon/hint/show-hint.js"></script>
+    <script src="/codemirror/addon/hint/javascript-hint.js"></script>
+    <script src="/codemirror/addon/fold/brace-fold.js"></script>
+    <script src="/codemirror/addon/fold/comment-fold.js"></script>
+    <script src="/codemirror/addon/fold/foldcode.js"></script>
+    <script src="/codemirror/addon/fold/foldgutter.js"></script>
+    <script src="/codemirror/addon/fold/indent-fold.js"></script>
+    <script src="/codemirror/addon/fold/markdown-fold.js"></script>
+    <script src="/codemirror/addon/fold/xml-fold.js"></script>
+    <script src="/codemirror/addon/fold/foldgutter.css"></script>
+    <link rel="stylesheet" href="/codemirror/theme/dracula.css">
+    <link rel="stylesheet" href="/codemirror/theme/eclipse.css">
+    <link rel="stylesheet" href="/codemirror/theme/night.css">
+    <link rel="stylesheet" href="/codemirror/theme/rubyblue.css">
+    <link rel="stylesheet" href="/codemirror/theme/cobalt.css">
+    <link rel="stylesheet" href="/codemirror/theme/material-ocean.css">
+    <link rel="stylesheet" href="/codemirror/theme/material-darker.css">
+    <link rel="stylesheet" href="/codemirror/theme/neo.css">
+    <link rel="stylesheet" href="/codemirror/theme/twilight.css">
+    <link rel="stylesheet" href="/codemirror/theme/monokai.css">
+
+
+</head>
+  
+<body id="body">
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <header>
+        <div class="mainContainer">
+            <div class="logo">
+                <img id="logoMain" src="https://i.ibb.co/sqF20Jw/coderz.png" alt="logo">
+            </div>
+            <div class="navBar">  
+                <a class="navBarop" href="/dashboard">
+                    <p>Goto Dashboard</p>
+                </a>
+                <img id="themeToggle" id="moon" src="/public/img/moon.png" alt="dakrMode">
+            </div>
+        </div>
+    </header>
+    <div class="solveChallenges">
+        <p>Solved Summary</p>
+    </div>
+    <div class="solutionView" style="display: flex; height: 550px; flex-direction: row; justify-content: center; margin-top: 10px; margin-left: 40px; margin-right: 40px;  padding-top: 10px; overflow-x: hidden; width: 100%; ">
+        <!-- <div class="solvedData" style="height: 500px; width: 700px;margin-top: 20px; background-color: #8f0000; border-radius: 5px; display: flex; flex-direction: column; align-items: center; overflow: scroll;">
+          
+        </div> -->
+        <div class="testScroller">
+            <%problem.forEach(problem=> {%>
+                <div class="codeContainer">
+                    <div class="qtitle">
+                        <p id="qTitle" style="margin-top: 5px;"><%= problem.problem_title %></p>
+                    </div>
+                    
+                    <div class="qlang">
+                        <p id="qlang" style="margin-top: 5px;"> Lang : <%= problem.lang %></p>
+                    </div>
+                    
+                    <div class="viewSolutionButton" onclick="updateEditor(`<%= problem.code %>`)">
+                       <p style="margin-top: 15px;">View</p>
+                    </div>
+    
+                </div>
+            <% }) %>
+                
+          
+
+        </div>
+
+        
+        
+        
+        <div style="width: 5px;"></div>
+        <div class="codeview">
+            <div class="codeContainer" style="height: 520px; width: 700px; background-color: #F6F6F6; border-radius: 5px;">
+
+                <textarea  id="editor" cols="30" rows="10" style="height: 100%; width: 100%; margin-bottom: -240px;">//Select Question To View</textarea>
+
+
+            </div>
+        </div>
+
+    </div>
+
+  </div>
+</body>
+<script src="/public/js/solvedProblem.js"></script>
+</html>
+

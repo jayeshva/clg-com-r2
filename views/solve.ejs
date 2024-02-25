@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solve</title>
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/code-512.png"
+        type="image/icon type">
+    <link type="text/css" rel="stylesheet" href="/public/styles/solve.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css” />
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/addon/edit/closebrackets.js"></script>
+    <script src="/codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="/codemirror/addon/edit/matchtags.js"></script>
+    <script src="/codemirror/addon/edit/closetag.js"></script>
+    <script src="/codemirror/addon/edit/continuelist.js"></script>
+    <script src="/codemirror/addon/edit/trailingspace.js"></script>
+    <script src="/codemirror/mode/clike/clike.js"></script>
+    <script src="/codemirror/mode/python/python.js"></script>
+    <script src="/codemirror/mode/ruby/ruby.js"></script>
+    <script src="/codemirror/mode/go/go.js"></script>
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
+    <script src="/codemirror/mode/css/css.js"></script>
+    <script src="/codemirror/addon/hint/anyword-hint.js"></script>
+    <script src="/codemirror/addon/hint/show-hint.js"></script>
+    <script src="/codemirror/addon/hint/javascript-hint.js"></script>
+    <script src="/codemirror/addon/fold/brace-fold.js"></script>
+    <script src="/codemirror/addon/fold/comment-fold.js"></script>
+    <script src="/codemirror/addon/fold/foldcode.js"></script>
+    <script src="/codemirror/addon/fold/foldgutter.js"></script>
+    <script src="/codemirror/addon/fold/indent-fold.js"></script>
+    <script src="/codemirror/addon/fold/markdown-fold.js"></script>
+    <script src="/codemirror/addon/fold/xml-fold.js"></script>
+    <script src="/codemirror/addon/fold/foldgutter.css"></script>
+    <link rel="stylesheet" href="/codemirror/theme/dracula.css">
+    <link rel="stylesheet" href="/codemirror/theme/eclipse.css">
+    <link rel="stylesheet" href="/codemirror/theme/night.css">
+    <link rel="stylesheet" href="/codemirror/theme/rubyblue.css">
+    <link rel="stylesheet" href="/codemirror/theme/cobalt.css">
+    <link rel="stylesheet" href="/codemirror/theme/material-ocean.css">
+    <link rel="stylesheet" href="/codemirror/theme/material-darker.css">
+    <link rel="stylesheet" href="/codemirror/theme/neo.css">
+    <link rel="stylesheet" href="/codemirror/theme/twilight.css">
+    <link rel="stylesheet" href="/codemirror/theme/monokai.css">
+
+    <style>
+        #load {
+            display: none;
+            position: fixed;
+            top: 54%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 9999;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+    </style>
+
+</head>
+
+<body id="body">
+    <div id="load">
+
+    </div>
+
+    <div class="SubmitContainer" id="SubmitId" style="display: none;">
+        <img id="submitLogo" src="" width="65" height="65">
+        <p id="resHead" style="font-size: 20px;">Congratulations !</p>
+        <p id="resDesc"></p>
+        <p id="res" style="font-size: 18px;"></p>
+
+        <div class="GotoButton">
+            <a id="subA" href="#">
+                <p id="subB" style="margin: 0;"></p>
+            </a>
+        </div>
+  
+    </div>
+
+    <div class="div" style="display: flex; flex-direction: row; justify-content: center; align-content:center;">
+        <div class="bugContainer" id="bugContainerId"
+        style="display: none; position: absolute; background-color: #FBFBFB; flex-direction: column; 
+        width: 350px; height: fit-content; margin-top: 150px;
+        padding-left: 20px; padding-bottom: 20px; border: 1px solid #00E484; z-index: 1;">
+        <div class="bugHeader">
+            <p id="bugHead" style="font-size: 20px; color: red;">Report Bug :-</p>
+            <p id="bugDesc">Please describe the bug in detail :</p>
+        </div>
+        <div class="bugBody">
+            <textarea id="bugInput" cols="30" rows="10"
+                style="padding-left: 5px; padding-top: 5px; width: 300px; height: 150px;"></textarea>
+        </div>
+
+        <div class="div" style="display: flex; flex-direction: row; justify-content:space-evenly;">
+            <div class="bugFooter">
+                <div class="bugButton" id="bugButtonsubmit" style="width: 84px;
+                height: 35px;
+                flex-shrink: 0;
+                border-radius: 5px;
+                background: #00E484;
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                color: white;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;">
+                    <p  style="margin: 0;">Submit</p>
+                </div>
+            </div>
+            <div class="bugFooter">
+                <div class="bugButton" id="bugButtoncancel" style="width: 84px;
+                height: 35px;
+                flex-shrink: 0;
+                border-radius: 5px;
+                background: #00E484;
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                color: white;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;">
+                    <p style="margin: 0;">Cancel</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    </div>
+   
+    <header>
+        <div class="mainContainer">
+            <div class="logo">
+                <img id="logoMain" src="https://i.ibb.co/sqF20Jw/coderz.png" alt="logo">
+            </div>
+            <div class="navBar">
+                <a href="/dashboard" id="navBar-a">
+                    <p>Goto Dashboard</p>
+                </a>
+                <img id="themeToggle" id="moon" src="/public/img/moon.png" alt="dakrMode">
+            </div>
+        </div>
+    </header>
+
+    <div class="playArea">
+        <div class="questionSide">
+            <div class="questionDisplay">
+
+                <div class="questionData questionDataStyler">
+                    <div class="questionTitle dcolor">
+                        <p style="font-size: 22px;">Title :-</p>
+                        <p style="font-size: 22px; margin-left: 20px;">
+                            <%= problem.problem_title %>
+                        </p>
+                        <div id="divbookmark" class="bookdiv"
+                            style="margin-left: 500px; cursor: pointer; position: absolute;">
+                            <img id="bookmark" src="" width="30" height="30">
+                        </div>
+                        <div id="divbug" class="bugdiv"
+                            style="margin-left: 550px; cursor: pointer; position: absolute;">
+                            <img id="bugs" src="" width="30" height="30">
+                        </div>
+
+
+                    </div>
+                    <div class="questionDescription questionDataStyler dcolor">
+                        <p>Description :-</p>
+                        <textarea class="textAreacolor" name="" id="desc_input" cols="30" rows="10"
+                            style="padding-left: 5px; padding-top: 5px;" readonly></textarea>
+                    </div>
+
+                    <div class="testScroller">
+                        <% problem.test_cases.forEach(testcase=>{ %>
+                            <div class="SampleInput questionDataStyler" id="<%= testcase._id %>">
+                                <div class="inputContainer dcolor">
+                                    <p>Sample Input :-</p>
+                                    <textarea name="" id="input_<%= testcase._id %>" cols="30" rows="4"
+                                        class="test_input textAreacolor" readonly><%= testcase.input %></textarea>
+
+                                </div>
+                                <div class="outputContainer dcolor">
+                                    <p>Sample Output :-</p>
+                                    <textarea name="" id="output_<%= testcase._id %>" cols="30" rows="4"
+                                        class="test_input textAreacolor" readonly><%= testcase.output %></textarea>
+                                </div>
+                                <div class="resultLogo">
+                                    <div class="resultLogo">
+                                        <img id="img_<%= testcase._id %>" width="35" height="25" alt="Passed"
+                                            style="margin-top: -50px; visibility: hidden;">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <% }) %>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+        <div style="width: 35px;"></div>
+        <div class="editorContainer">
+            <div class="solveDisplay">
+                <div class="preference">
+                    <select class="form-select" id="inlineFormSelectPref" onchange="programTemplate()">
+                        <option selected value="C">C</option>
+                        <option value="Cpp">C++</option>
+                        <option value="Java">Java</option>
+                        <option value="Python">Python</option>
+                        <option value="Golang">Golang</option>
+                        <option value="Ruby">Ruby</option>
+                    </select>
+                    <select class="form-select" id="inlineFormtheme" onchange="changeTheme(this.value)">
+                        <option selected value="dracula">Theme</option>
+                        <option value="eclipse">Eclipse</option>
+                        <option value="night">Night</option>
+                        <option value="rubyblue">Ruby</option>
+                        <option value="twilight">Twilight</option>
+                        <option value="monokai">Monokai</option>
+                        <option value="dracula">Dracula</option>
+                        <option value="neo">Neo</option>
+                        <option value="cobalt">Cobalt</option>
+                        <option value="material-darker">Material Dark</option>
+                        <option value="material-ocean">Material Ocean</option>
+                    </select>
+                </div>
+                <div style="height: 5px;"></div>
+                <textarea id="editor">
+
+            </textarea>
+            </div>
+            <div class="compileOptions">
+                <div class="checkBox">
+                    <input type="checkbox" name="customInput" id="customInputBox">
+                    <label for="customInput">Test With Custom Input</label>
+                </div>
+
+
+                <div class="verifictions">
+                    <div class="runDisplay" id="run">
+                        <p style="margin: 0;">Run</p>
+                    </div>
+                    <div class="submitDisplay" id="submit">
+                        <p style="margin: 0;">Submit</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="customioContainer">
+                <div class="customoutputContainer">
+                    <p>Output</p>
+                    <textarea class="textAreacolor" id="customoutput" spellcheck="false" readonly></textarea>
+                </div>
+                <div class="custominputContainer">
+                    <p>Input</p>
+                    <textarea class="textAreacolor" id="custominput" spellcheck="false"></textarea>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+
+
+    var description = document.getElementById("desc_input");
+    description.value = `<%= problem.problem_description %>`;
+    var userId = "<%= user.email %>";
+    var problemId = "<%= problem._id %>";
+    var problemName = "<%= problem.problem_title %>";
+
+    //write code to initially fetch if problem id present in bookmarked problems if present in bookmarked problem set bookmark img's src="/public/img/bookgreen.png"
+    //else src="/public/img/bookmark.png"
+    document.addEventListener("DOMContentLoaded", function () {
+        // Your fetch and image source changing code here
+        var img = fetch(`/findBookmarks/${userId}/${problemId}`)
+            .then((response) => {
+                return response.json();
+            })
+
+            .catch((error) => {
+                console.error('Error loading initial bookmark img : ', error);
+                // Handle the error (e.g., show an error message)
+            });
+
+        img.then((data) => {
+            if (data.out == 1) {
+                document.getElementById("bookmark").src = "/public/img/bookyellow.png";
+            }
+            else if (data.out == 0) {
+                document.getElementById("bookmark").src = "/public/img/bookgreen.png";
+            }
+        });
+
+        var bugimg = fetch(`/findBugs/${userId}/${problemId}`)
+            .then((response) => {
+                return response.json();
+            })
+
+            .catch((error) => {
+                console.error('Error loading initial bookmark img : ', error);
+                // Handle the error (e.g., show an error message)
+            });
+
+        bugimg.then((data) => {
+            if (data.out == 1) {
+                document.getElementById("bugs").src = "/public/img/bug.png";
+            }
+            else if (data.out == 0) {
+                document.getElementById("bugs").src = "/public/img/bugyellow.png";
+            }
+        });
+    });
+
+
+
+</script>
+
+<script src="/public/js/solve.js"></script>
+
+</html>

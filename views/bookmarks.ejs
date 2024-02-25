@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="/public/styles/bookmarks.css" />
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/code-512.png"
+        type="image/icon type" />
+    <title>Bookmarks</title>
+
+    <script src="/public/js/bookmarks.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="mainContainer">
+            <div class="logo">
+                <img id="logoMain" src="https://i.ibb.co/sqF20Jw/coderz.png" alt="logo" />
+            </div>
+            <div class="navBar">
+                <a class="navBarop" href="/codespace" style="text-decoration: none; color: black">
+                    <p>Code Space</p>  
+                </a>
+                
+                <a class="navBarop" href="/dashboard" style="text-decoration: none; color: black">
+                    <p class="navBarop" style="color: black;">Dashboard</p>
+                </a>
+                <p style="color: #00e484; font-weight: 500">Bookmarks</p>
+                <img id="themeToggle" id="moon" src="public/img/moon.png" alt="dakrMode" />
+            </div>
+        </div>
+    </header> 
+    <br />
+    <div class="solveChallenges">
+        <p>Bookmarked Challenges</p>
+    </div>
+    <div class="div" style="display:flex ;flex-flow: row ;justify-content: center;">
+        <div class="challenges">
+            <%problem.forEach(problems=> {%>
+                <div class="challenges-Wrapper">
+                    <div class="titleClass">
+                        <p class="pTitle">
+                            <%= problems.problem_title %>
+                        </p>
+                    </div>
+    
+                    <% if(problems.problem_category=="easy" ){ %>
+                     <div class="categoryClass">
+                            <p class="pLevel">Easy</p>
+                        </div>
+    
+                        <%}%>
+                            <% if(problems.problem_category=="medium" ){ %>
+                                <div class="categoryClass">
+                                    <p class="pLevel" style="color: #eba900">Medium</p>
+                                </div>
+    
+                                <%}%>
+                                    <% if(problems.problem_category=="hard" ){ %>
+                                        <div class="categoryClass">
+                                            <p class="pLevel" style="color: #d80a0a">Hard</p>
+                                        </div>
+                                        <%}%>
+                                            <div class="SolveButton">
+                                                <a id="/solve/<%=problems._id%>" href="/solve/<%=problems.problem_id%>">
+                                                    <p>Solve</p>
+                                                </a>
+                                            </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    var toggleButton = document.getElementById("toggleButton");
+    var toggleSwitch = document.querySelector(".toggle-switch");
+
+    toggleButton.addEventListener("click", () => {
+        console.log("clicked");
+        toggleButton.classList.toggle("active");
+    });
+
+   
+
+    function getClassForCategory(category) {
+        if (category === "easy") {
+            return "easy-category";
+        } else if (category === "medium") {
+            return "medium-category";
+        } else {
+            return "hard-category";
+        }
+    }
+</script>
+<script src="public/js/bookmarks.js"></script>
+</html>

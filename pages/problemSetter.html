@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Problem</title>
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/code-512.png"
+        type="image/icon type">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Add Problem</h2>
+        <form id="problem-form">
+            <div class="form-group">
+                <label for="problem-category">Problem Category</label>
+                <select class="form-control" id="problem-category" required>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="problem-id">Problem Id</label>
+                <input type="text" class="form-control" id="problem-id" required>
+            </div>
+            <div class="form-group">
+                <label for="problem-title">Problem Title</label>
+                <input type="text" class="form-control" id="problem-title" required>
+            </div>
+            <div class="form-group">
+                <label for="problem-description">Problem Description</label>
+                <textarea class="form-control" id="problem-description" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="test-case-input">Test Case Input</label>
+                <textarea class="form-control" id="test-case-input" rows="2" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="test-case-output">Test Case Output</label>
+                <textarea class="form-control" id="test-case-output" rows="2" required></textarea>
+            </div>
+           
+            <button type="submit" class="btn btn-primary">Add Problem</button>
+        </form>
+        <hr>
+        <h3>Add Additional Test Cases</h3>
+        <select class="form-control" id="selected-problem">
+            <option value="" selected>Select Problem</option>
+            <!-- Populated dynamically using JavaScript -->
+        </select>
+        <form id="additional-test-case-form">
+        <div class="form-group">
+            <label for="additional-test-case-input">Test Case Input</label>
+            <textarea class="form-control" id="additional-test-case-input" rows="2" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="additional-test-case-output">Test Case Output</label>
+            <textarea class="form-control" id="additional-test-case-output" rows="2" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="test-case-visible">Hidden</label>
+            <input type="checkbox" class="form-control" id="test-case-visible"></input>
+        </div>
+        <button type="submit" class="btn btn-primary" id="add-test-case">Add Test Case</button>
+        </form>
+        <hr>
+        <h3>Delete Question</h3>
+        <select class="form-control" id="deleted-problem">
+            <option value="" selected>Select Problem</option>
+            <!-- Populated dynamically using JavaScript -->
+        </select>
+        <button class="btn btn-primary" id="delete-problem" onclick="delete_Problem()">Delete Problem</button>
+    </div>
+    </div>
+    
+    <script src="home/pages/problemsetter.js">
+        
+    </script>
+</body>
+</html>

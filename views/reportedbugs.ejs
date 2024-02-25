@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="/public/styles/reportedbugs.css" />
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/code-512.png"
+        type="image/icon type" />
+    <title>Bugs</title>
+
+    <!-- <script src="/public/js/reportedbugs.js"></script> -->
+</head>
+
+<body>
+    <div class="div" style="display: flex; flex-direction: row; justify-content: center; align-content:center;">
+        <div class="bugContainer" id="bugContainerId"
+        style="display: none; position: absolute; background-color: #FBFBFB; flex-direction: column; 
+        width: 350px; height: fit-content; margin-top: 150px;
+        padding-left: 20px; padding-bottom: 20px; border: 1px solid #00E484; z-index: 1;">
+        <div class="bugHeader">
+            <p id="bugHead" style="font-size: 20px; color: red;">Bug Report :-</p>
+        </div>
+        <div class="bugBody">
+            <textarea id="bugInput" cols="30" rows="10"
+                style="padding-left: 5px; padding-top: 5px; width: 300px; height: 150px;"></textarea>
+        </div>
+
+        <div class="div" style="display: flex; flex-direction: row; justify-content:space-evenly;">
+            <div class="bugFooter">
+                <div class="bugButton" id="bugButtoncancel" style="width: 84px;
+                height: 35px;
+                flex-shrink: 0;
+                border-radius: 5px;
+                background: #00E484;
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                color: white;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;">
+                    <p style="margin: 0;">Cancel</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    </div>
+
+    <header>
+        <div class="mainContainer">
+            <div class="logo">
+                <img id="logoMain" src="https://i.ibb.co/sqF20Jw/coderz.png" alt="logo" />
+            </div>
+            <div class="navBar">
+                <a class="navBarop" href="/codespace" style="text-decoration: none; color: black">
+                    <p>Code Space</p>  
+                </a>
+                
+                <a class="navBarop" href="/dashboard" style="text-decoration: none; color: black">
+                    <p class="navBarop" style="color: black;">Dashboard</p>
+                </a>
+                <p style="color: #00e484; font-weight: 500">Bugs</p>
+                <img id="themeToggle" id="moon" src="public/img/moon.png" alt="dakrMode" />
+            </div>
+        </div>
+    </header> 
+    <br />
+    <div class="solveChallenges">
+        <p>Bug Reported Challenges</p>
+    </div>
+    <div class="div" style="display:flex ;flex-flow: row ;justify-content: center;">
+        <div class="challenges">
+            <%bugs.forEach(problems=> {%>
+                <div class="challenges-Wrapper">
+                    <div class="titleClass">
+                        <p class="pTitle">
+                            <%= problems.problem_title %>
+                        </p>
+                    </div>
+    
+                    <% if(problems.problem_category=="easy" ){ %>
+                     <div class="categoryClass">
+                            <p class="pLevel">Easy</p>
+                        </div>
+    
+                        <%}%>
+                            <% if(problems.problem_category=="medium" ){ %>
+                                <div class="categoryClass">
+                                    <p class="pLevel" style="color: #eba900">Medium</p>
+                                </div> 
+    
+                                <%}%>
+                                    <% if(problems.problem_category=="hard" ){ %>
+                                        <div class="categoryClass">
+                                            <p class="pLevel" style="color: #d80a0a">Hard</p>
+                                        </div>
+                                        <%}%>
+
+                                        <div class="SolveButton" style="margin-right: 20px;" id="viewBug_<%=problems.problem_id%>" onclick="showBug(`<%=problems.problem_id%>`,`<%=problems.bugs%>`)">
+                                            
+                                                <p>view bug</p>
+                                
+                                        </div> 
+                                            <div class="SolveButton">
+                                                <a id="/solve/<%=problems._id%>" href="/deleteBug/<%=problems.problem_id%>">
+                                                    <p>debug</p>
+                                                </a>
+                                            </div> 
+                </div>
+                <% }) %>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    var toggleButton = document.getElementById("toggleButton");
+    var toggleSwitch = document.querySelector(".toggle-switch");
+
+    toggleButton.addEventListener("click", () => {
+        console.log("clicked");
+        toggleButton.classList.toggle("active");
+    });
+
+   
+
+    function getClassForCategory(category) {
+        if (category === "easy") {
+            return "easy-category";
+        } else if (category === "medium") {
+            return "medium-category";
+        } else {
+            return "hard-category";
+        }
+    }
+</script>
+<script src="public/js/reportedbugs.js"></script>
+</html>

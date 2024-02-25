@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solve</title>
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/code-512.png"
+        type="image/icon type">
+    <link type="text/css" rel="stylesheet" href="/public/styles/solve.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css” />
+    <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+    <script src="/codemirror/lib/codemirror.js"></script>
+    <script src="/codemirror/addon/edit/closebrackets.js"></script>
+    <script src="/codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="/codemirror/addon/edit/matchtags.js"></script>
+    <script src="/codemirror/addon/edit/closetag.js"></script>
+    <script src="/codemirror/addon/edit/continuelist.js"></script>
+    <script src="/codemirror/addon/edit/trailingspace.js"></script>
+    <script src="/codemirror/mode/clike/clike.js"></script>
+    <script src="/codemirror/mode/python/python.js"></script>
+    <script src="/codemirror/mode/ruby/ruby.js"></script>
+    <script src="/codemirror/mode/go/go.js"></script>
+    <script src="/codemirror/mode/javascript/javascript.js"></script>
+    <script src="/codemirror/mode/css/css.js"></script>
+    <script src="/codemirror/addon/hint/anyword-hint.js"></script>
+    <script src="/codemirror/addon/hint/show-hint.js"></script>
+    <script src="/codemirror/addon/hint/javascript-hint.js"></script>
+    <script src="/codemirror/addon/fold/brace-fold.js"></script>
+    <script src="/codemirror/addon/fold/comment-fold.js"></script>
+    <script src="/codemirror/addon/fold/foldcode.js"></script>
+    <script src="/codemirror/addon/fold/foldgutter.js"></script>
+    <script src="/codemirror/addon/fold/indent-fold.js"></script>
+    <script src="/codemirror/addon/fold/markdown-fold.js"></script>
+    <script src="/codemirror/addon/fold/xml-fold.js"></script>
+    <script src="/codemirror/addon/fold/foldgutter.css"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <link rel="stylesheet" href="/codemirror/theme/dracula.css">
+    <link rel="stylesheet" href="/codemirror/theme/eclipse.css">
+    <link rel="stylesheet" href="/codemirror/theme/night.css">
+    <link rel="stylesheet" href="/codemirror/theme/rubyblue.css">
+    <link rel="stylesheet" href="/codemirror/theme/cobalt.css">
+    <link rel="stylesheet" href="/codemirror/theme/material-ocean.css">
+    <link rel="stylesheet" href="/codemirror/theme/material-darker.css">
+    <link rel="stylesheet" href="/codemirror/theme/neo.css">
+    <link rel="stylesheet" href="/codemirror/theme/twilight.css">
+    <link rel="stylesheet" href="/codemirror/theme/monokai.css">
+
+    <style>
+        #load {
+            display: none;
+            position: fixed;
+            top: 54%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 9999;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .count {
+            display: flex;
+            flex-direction: column;
+            margin-left: 130px;
+
+        }
+
+        #userCountImage {
+            margin-top: 10px;
+            width: 32px;
+            height: 37px;
+        }
+
+        #userCount {
+            margin-left: 10px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* .other-user-cursor {
+            position: absolute;
+            width: 0;
+            border-left: 2px solid #ff0000; */
+            /* You can change the color as desired */
+            /* z-index: 999;
+        } */
+    </style>
+
+</head>
+
+<body id="body">
+    <div id="load"></div>
+
+    <div class="SubmitContainer" id="SubmitId" style="display: none;">
+        <img id="submitLogo" src="" width="65" height="65">
+        <p id="resHead" style="font-size: 20px;">Congratulations !</p>
+        <p id="resDesc"></p>
+        <p id="res" style="font-size: 18px;"></p>
+
+        <div class="GotoButton">
+            <a id="subA" href="#">
+                <p id="subB" style="margin: 0;"></p>
+            </a>
+        </div>
+
+    </div>
+
+    </div>
+    <header>
+        <div class="mainContainer">
+            <div class="logo">
+                <img id="logoMain" src="https://i.ibb.co/sqF20Jw/coderz.png" alt="logo">
+            </div>
+            <div class="count">
+                <img id="userCountImage" src="/public/img/Group.png" alt="Connected user count">
+                <p id="userCount">0</p>
+            </div>
+            <div class="navBar">
+                <a href="/dashboard" id="navBar-a">
+                    <p>Goto Dashboard</p>
+                </a>
+                <img id="themeToggle" id="moon" src="/public/img/moon.png" alt="dakrMode">
+            </div>
+        </div>
+    </header>
+
+    <div class="playArea">
+        <div class="questionSide">
+            <div class="questionDisplay">
+
+                <div class="questionData questionDataStyler">
+                    <div class="questionTitle dcolor">
+                        <p style="font-size: 22px;">Title :-</p>
+                        <p style="font-size: 22px; margin-left: 20px;">
+                            <%= problem.problem_title %>
+                        </p>
+                    </div>
+                    <div class="questionDescription questionDataStyler dcolor">
+                        <p>Description :-</p>
+                        <textarea class="textAreacolor" name="" id="desc_input" cols="30" rows="10"
+                            style="padding-left: 5px; padding-top: 5px;" readonly></textarea>
+                    </div>
+
+                    <div class="testScroller">
+                        <% problem.test_cases.forEach(testcase=>{ %>
+                            <div class="SampleInput questionDataStyler" id="<%= testcase._id %>">
+                                <div class="inputContainer dcolor">
+                                    <p>Sample Input :-</p>
+                                    <textarea name="" id="input_<%= testcase._id %>" cols="30" rows="4"
+                                        class="test_input textAreacolor" readonly><%= testcase.input %></textarea>
+
+                                </div>
+                                <div class="outputContainer dcolor">
+                                    <p>Sample Output :-</p>
+                                    <textarea name="" id="output_<%= testcase._id %>" cols="30" rows="4"
+                                        class="test_input textAreacolor" readonly><%= testcase.output %></textarea>
+                                </div>
+                                <div class="resultLogo">
+                                    <div class="resultLogo dcolor">
+                                        <img id="img_<%= testcase._id %>" width="35" height="25" alt="Passed"
+                                            style="margin-top: -50px; visibility: hidden;">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <% }) %>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+        <div style="width: 35px;"></div>
+        <div class="editorContainer">
+            <div class="solveDisplay">
+                <div class="preference">
+                    <select class="form-select" id="inlineFormSelectPref" onchange="programTemplate()">
+                        <option selected value="C">C</option>
+                        <option value="Cpp">C++</option>
+                        <option value="Java">Java</option>
+                        <option value="Python">Python</option>
+                        <option value="Golang">Golang</option>
+                        <option value="Ruby">Ruby</option>
+                    </select>
+                    <select class="form-select" id="inlineFormtheme" onchange="changeTheme(this.value)">
+                        <option selected value="dracula">Theme</option>
+                        <option value="eclipse">Eclipse</option>
+                        <option value="night">Night</option>
+                        <option value="rubyblue">Ruby</option>
+                        <option value="twilight">Twilight</option>
+                        <option value="monokai">Monokai</option>
+                        <option value="dracula">Dracula</option>
+                        <option value="neo">Neo</option>
+                        <option value="cobalt">Cobalt</option>
+                        <option value="material-darker">Material Dark</option>
+                        <option value="material-ocean">Material Ocean</option>
+                    </select>
+                </div>
+                <div style="height: 5px;"></div>
+                <textarea id="editor">
+
+            </textarea>
+            </div>
+            <div class="compileOptions">
+                <div class="checkBox">
+                    <input type="checkbox" name="customInput" id="customInputBox">
+                    <label for="customInput">Test With Custom Input</label>
+                </div>
+
+
+                <div class="verifictions">
+                    <div class="runDisplay" id="run">
+                        <p style="margin: 0;">Run</p>
+                    </div>
+                    <div class="submitDisplay" id="submit">
+                        <p style="margin: 0;">Submit</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="customioContainer">
+                <div class="customoutputContainer">
+                    <p>Output</p>
+                    <textarea class="textAreacolor" id="customoutput" spellcheck="false" readonly></textarea>
+                </div>
+                <div class="custominputContainer">
+                    <p>Input</p>
+                    <textarea class="textAreacolor" id="custominput" spellcheck="false"></textarea>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+    var description = document.getElementById("desc_input");
+    description.value = `<%= problem.problem_description %>`;
+
+    const currentURL = window.location.href;
+
+    // Split the URL by slashes ("/") to get an array of parts
+    const parts = currentURL.split('/');
+
+    // The last part of the array will be the `questionid`
+    const questionid = parts[parts.length - 2];
+    var problemId = questionid;
+    var sessionId = parts[parts.length - 1];
+    var precode = "<%= problem.precode %>";
+    var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+        mode: "text/x-c++src",
+        theme: "dracula",
+        lineNumbers: true,
+        autoCloseBrackets: true,
+        indentUnit: 4,
+        smartIndent: true,
+    })
+    var start = 1;
+    fetch(`/initialCode/${sessionId}/${problemId}`)
+        .then((response) => response.text())
+        .then((initialCode) => {
+            // Initialize the code editor with the initial code
+            console.log("hello ", initialCode);
+            editor.setValue(initialCode);
+        })
+        .catch((error) => {
+            console.error('Error loading initial code:', error);
+            // Handle the error (e.g., show an error message)
+        });
+    fetch(`/initiallang/${sessionId}/${problemId}`)
+        .then((response) => response.text())
+        .then((initiallang) => {
+            // Initialize the code editor with the initial code
+            console.log("hello ", initiallang);
+            var lang = document.getElementById("inlineFormSelectPref").value = initiallang;
+            if (lang == "Java") {
+                editor.setOption("mode", "text/x-java")
+            }
+            else if (lang == "Python") {
+                editor.setOption("mode", "text/x-python")
+            }
+            else if (lang == "Golang") {
+                editor.setOption("mode", "go")
+            }
+            else if (lang == "Ruby") {
+                editor.setOption("mode", "ruby")
+            }
+            else {
+                editor.setOption("mode", "text/x-c++src")
+            }
+        })
+        .catch((error) => {
+            console.error('Error loading initial code:', error);
+            // Handle the error (e.g., show an error message)
+        });
+
+
+</script>
+
+<script src="/public/js/solveHire.js"></script>
+
+</html>

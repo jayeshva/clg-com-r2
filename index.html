@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="./assets/styles/index.css">
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/code-512.png"
+        type="image/icon type">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css” />
+    <link rel="stylesheet" href="./codemirror/lib/codemirror.css">
+    <script src="./codemirror/lib/codemirror.js"></script>
+    <script src="./codemirror/addon/edit/closebrackets.js"></script>
+    <script src="./codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="./codemirror/addon/edit/matchtags.js"></script>
+    <script src="./codemirror/addon/edit/closetag.js"></script>
+    <script src="./codemirror/addon/edit/continuelist.js"></script>
+    <script src="./codemirror/addon/edit/trailingspace.js"></script>
+    <script src="./codemirror/mode/clike/clike.js"></script>
+    <script src="./codemirror/mode/python/python.js"></script>
+    <script src="./codemirror/mode/javascript/javascript.js"></script>
+    <script src="./codemirror/mode/css/css.js"></script>
+    <script src="./codemirror/addon/hint/anyword-hint.js"></script>
+    <script src="./codemirror/addon/hint/show-hint.js"></script>
+    <script src="./codemirror/addon/hint/javascript-hint.js"></script>
+    <script src="./codemirror/addon/fold/brace-fold.js"></script>
+    <script src="./codemirror/addon/fold/comment-fold.js"></script>
+    <script src="./codemirror/addon/fold/foldcode.js"></script>
+    <script src="./codemirror/addon/fold/foldgutter.js"></script>
+    <script src="./codemirror/addon/fold/indent-fold.js"></script>
+    <script src="./codemirror/addon/fold/markdown-fold.js"></script>
+    <script src="./codemirror/addon/fold/xml-fold.js"></script>
+    <script src="./codemirror/addon/fold/foldgutter.css"></script>
+
+    <link rel="stylesheet" href="./codemirror/theme/dracula.css">
+    <link rel="stylesheet" href="./codemirror/theme/eclipse.css">
+    <link rel="stylesheet" href="./codemirror/theme/night.css">
+    <link rel="stylesheet" href="./codemirror/theme/rubyblue.css">
+    <link rel="stylesheet" href="./codemirror/theme/cobalt.css">
+    <link rel="stylesheet" href="./codemirror/theme/material-ocean.css">
+    <link rel="stylesheet" href="./codemirror/theme/material-darker.css">
+    <link rel="stylesheet" href="./codemirror/theme/neo.css">
+    <link rel="stylesheet" href="./codemirror/theme/twilight.css">
+    <link rel="stylesheet" href="./codemirror/theme/monokai.css">
+
+    <title>Jayesh IDE</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="mainContainer">
+            <div class="logo">
+                <img id="logoMain" src="https://i.ibb.co/wyHV0gg/jaylog.png" alt="logo">
+            </div>
+            <div class="navBar">
+                <p style="color: #00E484; font-weight: 500;">Code Space</p>
+                <a href="dashboard.html" style="text-decoration: none; color: black;"><p>Dashboard</p></a>
+                <a href="dashboard.html" style="text-decoration: none; color: black;"><p>Profile</p></a>
+                <img id="themeToggle" id="moon" src="./assets/img/moon.png" alt="dakrMode">
+            </div>
+        </div>
+    </header>
+    <div id="load"></div>
+    <div class="PlayArea">
+        <div class="textContainer">
+            <div class="operation">
+                <div class="selectors">
+                    <select class="form-select" id="inlineFormSelectPref" onchange="programTemplate()">
+                        <option selected value="C">C</option>
+                        <option value="Cpp">C++</option>
+                        <option value="Java">Java</option>
+                        <option value="Python">Python</option>
+                    </select>
+                    <select class="form-select" id="inlineFormtheme" onchange="changeTheme(this.value)">
+                        <option selected value="dracula">Theme</option>
+                        <option value="eclipse">Eclipse</option>
+                        <option value="night">Night</option>
+                        <option value="rubyblue">Ruby</option>
+                        <option value="twilight">Twilight</option>
+                        <option value="monokai">Monokai</option>
+                        <option value="dracula">Dracula</option>
+                        <option value="neo">Neo</option>
+                        <option value="cobalt">Cobalt</option>
+                        <option value="material-darker">Material Dark</option>
+                        <option value="material-ocean">Material Ocean</option>
+                    </select>
+                </div>
+
+
+                <div class="additionalButtons">
+                    <div class="btn-wrapper">
+                        <img class="btn-icon" id="downloadButton" src="./assets/img/download.png" alt="Download Icon">
+                    </div>
+                    <div class="btn-wrapper" onclick="document.getElementById('fileInputButton').click()">
+                        <img class="btn-icon" id="fileInput" src="./assets/img/upload.png" alt="Upload Icon">
+                        <input type="file" id="fileInputButton" class="hidden-input">
+                    </div>
+                    <div class="btn-wrapper">
+                        <img class="btn-icon" id="resetButton" src="./assets/img/reset.png" alt="Reset Icon">
+                    </div>
+
+                    <div class="runButton" id="runButton">
+                        <p>Run</p>
+                    </div>
+                </div>
+
+            </div>
+            <div style="height: 10px;">
+
+            </div>
+
+
+            <textarea id="editor">
+
+            </textarea>
+        </div>
+        <div class="ioContainer">
+            <div class="outputContainer" id="outputContainer">
+                <p>Output</p>
+                <textarea id="output" spellcheck="false" readonly></textarea>
+            </div>
+            <div class="inputContainer" id="inputContainer">
+                <p>Input</p>
+                <textarea id="input" spellcheck="false"></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        const codeArea = document.getElementById('editor');
+        const socket = io(); // Connect to the server
+        
+        // Send the code to the server when it changes
+        codeArea.addEventListener('input', () => {
+            socket.emit('codeChange', codeArea.value);
+        });
+        
+        // Receive updated code from the server and update the textarea
+        socket.on('codeChange', (newCode) => {
+            codeArea.value = newCode;
+        });
+    </script>
+
+</body>
+<script src="./assets/js/index.js"></script>
+
+</html>

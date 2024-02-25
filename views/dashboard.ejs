@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="/public/styles/dashboard.css" />
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/code-512.png"
+        type="image/icon type" />
+    <title>Dashboard</title>
+
+    <script src="/public/js/dashboard.js"></script>
+</head>
+
+<body>
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <header>
+        <div class="mainContainer">
+            <div class="logo">
+                <img id="logoMain" src="https://i.ibb.co/sqF20Jw/coderz.png" alt="logo" />
+            </div>
+            <div class="navBar">
+                <a class="navBarop" href="/codespace" style="text-decoration: none; color: black">
+                    <p>Code Space</p>  
+                </a>
+                <p style="color: #00e484; font-weight: 500">Dashboard</p>
+                <a class="navBarop" href="/viewBookmarks" style="text-decoration: none; color: black">
+                    <p class="navBarop" style="color: black;">Bookmarks</p>
+                </a>
+                <div class="toggle-container" id="toggleButton">
+                    <div class="toggle-switch"></div>
+                </div>
+                <img id="themeToggle" id="moon" src="public/img/moon.png" alt="dakrMode" />
+            </div>
+        </div>
+    </header> 
+    <br />
+    <div class="solveChallenges">
+        <p>Solve Challenges</p>
+    </div>
+
+    <div class="playArea">
+        <div class="dataDisplay">
+            <div class="ProblemsData" id="pd">
+                <div class="data-Wrapper" style="color: #1ba943">
+                    <p>Problems Solved</p>
+                    <% if (user.problemsSolved.length) { %>
+                        <p style="font-size: 20px;">
+                            <%= user.problemsSolved.length %>
+                        </p>
+                        <% } else { %>
+                            <p style="font-size: 20px;">0</p>
+                            <% } %>
+                </div>
+                <div class="data-Wrapper" style="color: #eba900; margin-top: -15px;">
+                    <p>Problems Attempted</p>
+                    <% if (user.problemsAttempted) { %>
+                        <p style="font-size: 20px;">
+                            <%= user.problemsAttempted.length %>
+                        </p>
+                        <% } else { %>
+                            <p style="font-size: 20px;">0</p>
+                            <% } %>
+                </div>
+                <div class="data-Wrapper" style="color: #d80a0a; margin-top: -10px;">
+                    <p>Total Problems</p>
+                    <p style="font-size: 20px;">
+                        <%= problems.length %>
+                    </p style="font-size: 20px;">
+                </div>
+            </div>
+
+            <div class="ProfileData" id="dp">
+                <img id="profileImg" src="public/img/profile.png" />
+                <div class="profileData-Wrapper">
+                    <p>
+                        <%= user.name %>
+                    </p>
+                </div>
+                <div class="profileData-Wrapper">
+                    <p>
+                        <%= user.email%>
+                    </p>
+                </div>
+                <div class="profileData-Wrapper">
+                    <p>+91 <%= user.mobile %>
+                    </p>
+                </div>
+
+                <a id="solvedLink" href="/summary">View Solved Problems</a>
+
+                <div class="SolveButton" style="margin-top: 20px">
+                    <a href="/logout" style="text-decoration: none; color: aliceblue">Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="challenges">
+            <%problems.forEach(problem=> {%>
+                <div class="challenges-Wrapper">
+                    <div class="titleClass">
+                        <p class="pTitle">
+                            <%= problem.problem_title %>
+                        </p>
+                    </div>
+
+                    <% if(problem.problem_category=="easy" ){ %>
+                     <div class="categoryClass">
+                            <p class="pLevel">Easy</p>
+                        </div>
+
+                        <%}%>
+                            <% if(problem.problem_category=="medium" ){ %>
+                                <div class="categoryClass">
+                                    <p class="pLevel" style="color: #eba900">Medium</p>
+                                </div>
+
+                                <%}%>
+                                    <% if(problem.problem_category=="hard" ){ %>
+                                        <div class="categoryClass">
+                                            <p class="pLevel" style="color: #d80a0a">Hard</p>
+                                        </div>
+                                        <%}%>
+                                            <div class="SolveButton" onclick="hireMode('<%=problem._id%>','<%=uuid%>')">
+                                                <a id="solveLink_<%=problem._id%>">
+                                                    <p>Solve</p>
+                                                </a>
+                                            </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+  </div>
+</body>
+
+<script>
+    var toggleButton = document.getElementById("toggleButton");
+    var toggleSwitch = document.querySelector(".toggle-switch");
+
+    toggleButton.addEventListener("click", () => {
+        console.log("clicked");
+        toggleButton.classList.toggle("active");
+    });
+
+    function hireMode(id, uuid) {
+        if (toggleButton.classList.contains("active")) {
+            var solveLink = document.getElementById("solveLink_" + id);
+            solveLink.href = "/solve/" + id + "/" + uuid;
+            return;
+        } else {
+            var solveLink = document.getElementById("solveLink_" + id);
+            solveLink.href = "/solve/" + id;
+        }
+    }
+
+    function getClassForCategory(category) {
+        if (category === "easy") {
+            return "easy-category";
+        } else if (category === "medium") {
+            return "medium-category";
+        } else {
+            return "hard-category";
+        }
+    }
+</script>
+<script src="public/js/reportedbugs.js"></script>
+
+</html>
