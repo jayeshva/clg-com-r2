@@ -110,7 +110,7 @@ run.addEventListener("click", async function () {
 
             for (let i = 0; i < result.test_cases.length; i++) {
                 code.input = result.test_cases[i].input;
-                var oData = await fetch("http://localhost/compile", {
+                var oData = await fetch("http://13.57.174.140/compile", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -149,7 +149,7 @@ run.addEventListener("click", async function () {
             }
             console.log("Passed Count:", passedCount);
             // code.input = final;
-            var oData = await fetch("http://localhost/compile", {
+            var oData = await fetch("http://13.57.174.140/compile", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -220,7 +220,7 @@ run.addEventListener("click", async function () {
 
             for (let i = 0; i < result.test_cases.length; i++) {
                 code.input = result.test_cases[i].input;
-                var oData = await fetch("http://localhost/compile", {
+                var oData = await fetch("http://13.57.174.140/compile", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -303,7 +303,7 @@ submit.addEventListener("click", async function () {
     }
     console.log(code)
     try {
-        var finalData = await fetch(`http://localhost/submit`, {
+        var finalData = await fetch(`http://13.57.174.140/submit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

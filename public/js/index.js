@@ -283,7 +283,7 @@ async function runCode() {
             load.style.display = "block"
         }
         try{
-            var oData = await fetch("http://localhost/compile", {
+            var oData = await fetch("http://13.57.174.140/compile", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
