@@ -365,9 +365,9 @@ app.get('/viewBookmarks', isLoggedIn, async function(req, res) {
             var problem = await Problem.find({ _id: book.problem_id });
             //send only problem title and problem id and problem category
             var bookpro = {
-                problem_id: problem.problem_id,
-                problem_title: problem.problem_title,
-                problem_category: problem.problem_category
+                problem_id: problem[0].problem_id,
+                problem_title: problem[0].problem_title,
+                problem_category: problem[0].problem_category
             }
             console.log("Problem : ", bookpro);
             bookmarkedProblems.push(bookpro);
@@ -378,7 +378,7 @@ app.get('/viewBookmarks', isLoggedIn, async function(req, res) {
     } catch (error) {
         console.error('Error getting problems:', error);
         // Render an error page in case of an error
-        res.status(500).render('error', { message: 'Error getting problems' });
+        res.status(500).render('bookmarks', { message: 'Error getting problems',problem: bookmarkedProblems });
     }
 });
 
