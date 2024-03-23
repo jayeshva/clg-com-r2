@@ -503,7 +503,7 @@ divbookmark.addEventListener("click", async function () {
     try {
 
         if (bookmark.src.includes("/public/img/bookgreen.png")) {
-            var finalData = await fetch(`http://localhost:3000/bookmark`, {
+            var finalData = await fetch(`http://13.57.174.140:3000/bookmark`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
