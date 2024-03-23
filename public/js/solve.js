@@ -521,7 +521,7 @@ divbookmark.addEventListener("click", async function () {
         }
 
         else if (bookmark.src.includes("/public/img/bookyellow.png")) {
-            var finalData = await fetch(`http://localhost:3000/bookmark`, {
+            var finalData = await fetch(`http://13.57.174.140:3000/bookmark`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
