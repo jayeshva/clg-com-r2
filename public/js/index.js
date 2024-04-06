@@ -283,7 +283,7 @@ async function runCode() {
             load.style.display = "block"
         }
         try{
-            var oData = await fetch("http://13.57.174.140/compile", {
+            var oData = await fetch("http://code.jayworks.tech/compile", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
