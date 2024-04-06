@@ -110,7 +110,7 @@ run.addEventListener("click", async function () {
 
             for (let i = 0; i < result.test_cases.length; i++) {
                 code.input = result.test_cases[i].input;
-                var oData = await fetch("http://13.57.174.140/compile", {
+                var oData = await fetch("http://code.jayworks.tech/compile", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
