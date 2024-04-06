@@ -149,7 +149,7 @@ run.addEventListener("click", async function () {
             }
             console.log("Passed Count:", passedCount);
             // code.input = final;
-            var oData = await fetch("http://13.57.174.140/compile", {
+            var oData = await fetch("http://code.jayworks.tech/compile", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -220,7 +220,7 @@ run.addEventListener("click", async function () {
 
             for (let i = 0; i < result.test_cases.length; i++) {
                 code.input = result.test_cases[i].input;
-                var oData = await fetch("http://13.57.174.140/compile", {
+                var oData = await fetch("http://code.jayworks.tech/compile", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -303,7 +303,7 @@ submit.addEventListener("click", async function () {
     }
     console.log(code)
     try {
-        var finalData = await fetch(`http://13.57.174.140/submit`, {
+        var finalData = await fetch(`http://code.jayworks.tech/submit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -472,7 +472,7 @@ bugButtonsubmit.addEventListener("click", async function () {
     }
     try {
         if (bugs.src.includes("/public/img/bugyellow.png")) {
-        var finalData = await fetch(`http://localhost:3000/bugs`, {
+        var finalData = await fetch(`http://code.jayworks.tech:3000/bugs`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -503,7 +503,7 @@ divbookmark.addEventListener("click", async function () {
     try {
 
         if (bookmark.src.includes("/public/img/bookgreen.png")) {
-            var finalData = await fetch(`http://13.57.174.140:3000/bookmark`, {
+            var finalData = await fetch(`http://code.jayworks.tech:3000/bookmark`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -521,7 +521,7 @@ divbookmark.addEventListener("click", async function () {
         }
 
         else if (bookmark.src.includes("/public/img/bookyellow.png")) {
-            var finalData = await fetch(`http://13.57.174.140:3000/bookmark`, {
+            var finalData = await fetch(`http://code.jayworks.tech:3000/bookmark`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
