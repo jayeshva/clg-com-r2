@@ -365,7 +365,7 @@ app.get('/viewBookmarks', isLoggedIn, async function(req, res) {
             var problem = await Problem.find({ _id: book.problem_id });
             //send only problem title and problem id and problem category
             var bookpro = {
-                problem_id: problem[0].problem_id,
+                problem_id: problem[0]._id,
                 problem_title: problem[0].problem_title,
                 problem_category: problem[0].problem_category
             }
