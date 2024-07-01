@@ -472,7 +472,7 @@ bugButtonsubmit.addEventListener("click", async function () {
     }
     try {
         if (bugs.src.includes("/public/img/bugyellow.png")) {
-        var finalData = await fetch(`http://code.jayworks.tech:3000/bugs`, {
+        var finalData = await fetch(`http://code.jayworks.tech/bugs`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -503,7 +503,7 @@ divbookmark.addEventListener("click", async function () {
     try {
 
         if (bookmark.src.includes("/public/img/bookgreen.png")) {
-            var finalData = await fetch(`http://code.jayworks.tech:3000/bookmark`, {
+            var finalData = await fetch(`http://code.jayworks.tech/bookmark`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -521,7 +521,7 @@ divbookmark.addEventListener("click", async function () {
         }
 
         else if (bookmark.src.includes("/public/img/bookyellow.png")) {
-            var finalData = await fetch(`http://code.jayworks.tech:3000/bookmark`, {
+            var finalData = await fetch(`http://code.jayworks.tech/bookmark`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
