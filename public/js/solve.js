@@ -110,7 +110,7 @@ run.addEventListener("click", async function () {
 
             for (let i = 0; i < result.test_cases.length; i++) {
                 code.input = result.test_cases[i].input;
-                var oData = await fetch("http://code.jayworks.tech/compile", {
+                var oData = await fetch("https://compiler.jayworks.tech/compile", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -149,7 +149,7 @@ run.addEventListener("click", async function () {
             }
             console.log("Passed Count:", passedCount);
             // code.input = final;
-            var oData = await fetch("http://code.jayworks.tech/compile", {
+            var oData = await fetch("https://compiler.jayworks.tech/compile", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -220,7 +220,7 @@ run.addEventListener("click", async function () {
 
             for (let i = 0; i < result.test_cases.length; i++) {
                 code.input = result.test_cases[i].input;
-                var oData = await fetch("http://code.jayworks.tech/compile", {
+                var oData = await fetch("https://compiler.jayworks.tech/compile", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -303,7 +303,7 @@ submit.addEventListener("click", async function () {
     }
     console.log(code)
     try {
-        var finalData = await fetch(`http://code.jayworks.tech/submit`, {
+        var finalData = await fetch(`https://compiler.jayworks.tech/submit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -472,7 +472,7 @@ bugButtonsubmit.addEventListener("click", async function () {
     }
     try {
         if (bugs.src.includes("/public/img/bugyellow.png")) {
-        var finalData = await fetch(`http://code.jayworks.tech/bugs`, {
+        var finalData = await fetch(`https://code.jayworks.tech/bugs`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -503,7 +503,7 @@ divbookmark.addEventListener("click", async function () {
     try {
 
         if (bookmark.src.includes("/public/img/bookgreen.png")) {
-            var finalData = await fetch(`http://code.jayworks.tech/bookmark`, {
+            var finalData = await fetch(`https://code.jayworks.tech/bookmark`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -521,7 +521,7 @@ divbookmark.addEventListener("click", async function () {
         }
 
         else if (bookmark.src.includes("/public/img/bookyellow.png")) {
-            var finalData = await fetch(`http://code.jayworks.tech/bookmark`, {
+            var finalData = await fetch(`https://code.jayworks.tech/bookmark`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
